@@ -4,6 +4,7 @@ from .src import (
     ImagesGridByRowsNode,
     ImageCombineNode,
     GridAnnotationNode,
+    MaskToBoundingBoxNode,
 )
 
 
@@ -13,4 +14,5 @@ NODE_CLASS_MAPPINGS = {
     "ImagesGridByRows": ImagesGridByRowsNode,
     "ImageCombine": ImageCombineNode,
     "GridAnnotation": GridAnnotationNode,
+    "MaskToBoundingBox": MaskToBoundingBoxNode,
 }
