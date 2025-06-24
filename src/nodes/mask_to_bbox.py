@@ -15,14 +15,18 @@ class MaskToBoundingBoxNode(BaseNode):
             "required": {
                 "mask": ("MASK",),
             },
+            "optional": {
+                "threshold": ("FLOAT", {"default": 0.5, "min": 0.0, "max": 1.0, "step": 0.01}),
+            },
         }
 
-    def execute(self, mask: torch.Tensor) -> tuple[str,]:
+    def execute(self, mask: torch.Tensor, threshold: float = 0.5) -> tuple[str,]:
         """
         Convert mask(s) to bounding box coordinates.
         
         Args:
             mask: Tensor of shape (batch_size, height, width) or (height, width)
+            threshold: Minimum value to consider as part of the mask (default: 0.5)
             
         Returns:
             JSON string containing list of bounding boxes in format:
@@ -43,8 +47,11 @@ class MaskToBoundingBoxNode(BaseNode):
             # Convert to numpy for easier processing
             mask_np = current_mask.cpu().numpy()
             
-            # Find non-zero pixels
-            nonzero_coords = np.nonzero(mask_np)
+            # Apply threshold to get binary mask
+            binary_mask = mask_np > threshold
+            
+            # Find non-zero pixels in the thresholded mask
+            nonzero_coords = np.nonzero(binary_mask)
             
             if len(nonzero_coords[0]) == 0:
                 # Empty mask - add empty bounding box
