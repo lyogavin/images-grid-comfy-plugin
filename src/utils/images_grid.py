@@ -53,7 +53,7 @@ def _create_images_grid(
     grid_width = size[0] * max_columns + (max_columns - 1) * gap
     grid_height = size[1] * max_rows + (max_rows - 1) * gap
 
-    grid_image = Image.new("RGB", (grid_width, grid_height), color="white")
+    grid_image = Image.new("RGBA", (grid_width, grid_height), color="white")
 
     _arrange_images_on_grid(grid_image, images=images, size=size, max_columns=max_columns, gap=gap)
 
@@ -112,7 +112,7 @@ def _create_grid_annotation(
         top_padding = max(elem.count("\n") for elem in column_texts) * int(font.size) + int(font.size * 2)
 
     image = Image.new(
-        "RGB",
+        "RGBA",
         (grid.size[0] + left_padding, grid.size[1] + top_padding),
         color="white",
     )
