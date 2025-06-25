@@ -5,6 +5,7 @@ from .src import (
     ImageCombineNode,
     GridAnnotationNode,
     MaskToBoundingBoxNode,
+    IndexSelectorNode,
 )
 
 
@@ -15,4 +16,5 @@ NODE_CLASS_MAPPINGS = {
     "ImageCombine": ImageCombineNode,
     "GridAnnotation": GridAnnotationNode,
     "MaskToBoundingBox": MaskToBoundingBoxNode,
+    "IndexSelector": IndexSelectorNode,
 }
